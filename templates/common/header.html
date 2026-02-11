@@ -1,0 +1,16 @@
+<header class="system-header">
+    <div class="header-container">
+        <div class="system-name">
+            予約管理システム
+        </div>
+
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">ログアウト</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</header>

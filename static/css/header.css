@@ -32,14 +32,3 @@ body {
 .user-info {
     font-size: 14px;
 }
-
-/* ログアウトリンク */
-.logout {
-    margin-left: 10px;
-    color: #ffcccc;
-    text-decoration: none;
-}
-
-.logout:hover {
-    text-decoration: underline;
-}

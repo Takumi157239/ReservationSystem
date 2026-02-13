@@ -1,0 +1,40 @@
+/* ログイン画面の枠組み */
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ログイン画面のタイトル */
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+/* インプットボックス */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* ログインボタン */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ログインボタンセレクト時 */
+.login-button:hover {
+    background: #45a049;
+}

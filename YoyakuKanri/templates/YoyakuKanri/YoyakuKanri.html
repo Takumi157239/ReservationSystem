@@ -4,4 +4,18 @@
 
 {% block content %}
     <h2>予約管理</h2>
+
+    <table class="product-table">
+        <th>ID</th>
+        <th>患者名</th>
+        <th>生年月日</th>
+
+        {% for kanzyadata in kanzyadatas %}
+            <tr>
+                <td>{{ kanzyadata.ID }}</td>
+                <td>{{ kanzyadata.KANZYA_NAME }}</td>
+                <td>{{ kanzyadata.SEINENGAPPI }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

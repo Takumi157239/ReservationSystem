@@ -1,5 +1,26 @@
-/* 患者データリスト */
-.product-table{
+:root {
+    /* タイトルやテーブルの余白を定義 */
+    --yoyakugamen-yohaku: 10px;
+}
+
+/* ここから予約管理画面 --------------------------*/
+
+/* 予約管理のタイトル */
+.yoyaku-title{
+    margin-left: var(--yoyakugamen-yohaku);
+}
+
+/* 予約テーブルの枠組み */
+.yoyaku-table-container{
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-left: var(--yoyakugamen-yohaku);
+    margin-right: var(--yoyakugamen-yohaku);
+    padding-bottom: 20px;
+}
+
+/* 患者データテーブル */
+.yoyaku-table{
     width: 100%;
     border-collapse: collapse;
     background-color: #ffffff;
@@ -8,30 +29,299 @@
     overflow: hidden;
 }
 
-/* 患者データリストヘッダー */
-.product-table thead {
+/* 編集ボタンの列 */
+.edit-column{
+    width: 80px;
+    text-align: center;
+}
+
+/* 編集ボタン */
+.edit-column-button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-column-button:hover{
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* 患者データテーブルヘッダー */
+.yoyaku-table thead {
     background-color: #4a90e2;
     color: #ffffff;
 }
 
-.product-table th,
-.product-table td {
+.yoyaku-table th,
+.yoyaku-table td {
     padding: 14px 16px;
     text-align: left;
 }
 
-/* 患者データリストボーダー */
-.product-table tbody tr {
+/* 患者データテーブルボーダー */
+.yoyaku-table tbody tr {
     border-bottom: 1px solid #e0e0e0;
 }
 
-/* 患者データリストホバー効果 */
-.product-table tbody tr:hover td {
+/* 患者データテーブルホバー効果 */
+.yoyaku-table tbody tr:hover td {
     background-color: #f1f7ff;
     transition: 0.2s ease;
 }
 
-/* 患者データリスト奇数行色 */
-.product-table tbody tr:nth-child(even) {
+/* 患者データテーブル奇数行色 */
+.yoyaku-table tbody tr:nth-child(even) {
     background-color: #fafafa;
+}
+
+
+/* ここから編集画面 --------------------------*/
+
+/* 編集画面の枠組み */
+.edit-container{
+    max-width: 600px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 入力欄枠組み */
+.edit-form-group{
+    margin-bottom: 20px;
+}
+
+/* お客様ID枠組み */
+.customer-id-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f4f6f9;
+    border-left: 5px solid #2c3e50;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.customer-id-label {
+    font-size: 14px;
+    color: #555;
+}
+
+.customer-id-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    letter-spacing: 1px;
+}
+
+/* 入力欄ラベル */
+.edit-form-label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+/* 入力欄 */
+.edit-form-group input[type="text"],
+.edit-form-group input[type="date"],
+.edit-form-group input[type="email"],
+.edit-form-group input[type="datetime-local"],
+.edit-form-group textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccd6dd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* その他テキスト欄 */
+.edit-form-group textarea {
+    resize: vertical;
+}
+
+/* チェックボックス */
+.edit-checkbox-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+/* 保存と戻るボタンの枠組み */
+.edit-form-button-box{
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+/* 保存と戻るボタン */
+.edit-form-save-button,
+.edit-form-back-button,
+.edit-form-zikaiyoyaku-button{
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #2563eb;
+    color: white;
+}
+
+.edit-form-save-button:hover,
+.edit-form-back-button:hover,
+.edit-form-zikaiyoyaku-button:hover{
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* エラーメッセージ */
+.edit-form-error-message{
+    color: red;
+}
+
+
+/* ここから次回予約画面 --------------------------*/
+
+/* 次回予約テーブル枠組み */
+.zikaiyoyaku-table-wrapper{
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* 次回予約のタイトル */
+.zikaiyoyaku-title{
+    margin-left: var(--yoyakugamen-yohaku);
+}
+
+/* 来月へと前月へのaタグの枠組み */
+.zikaiyoyaku-month-move-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: var(--yoyakugamen-yohaku);
+}
+
+/* 次回予約テーブル */
+.zikaiyoyaku-table{
+    border-collapse: collapse;
+    min-width: 1000px;
+    background: white;
+    width: 100%;
+}
+
+.zikaiyoyaku-table th,
+.zikaiyoyaku-table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+}
+
+.zikaiyoyaku-table th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+.zikaiyoyaku-time-cell {
+    background-color: #f9fafb;
+    font-weight: bold;
+}
+
+.zikaiyoyaku-slot-reserved {
+    background-color: #e5e7eb;
+    pointer-events: none;
+}
+
+.zikaiyoyaku-slot-available:hover {
+    background-color: #dbeafe;
+}
+
+
+/* ここから次回予約確認画面 --------------------------*/
+.yoyaku-kakunin-body{
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.yoyaku-kakunin-card{
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 420px;
+    text-align: center;
+}
+
+.yoyaku-kakunin-card h2{
+    margin-bottom: 30px;
+    color: #111827;
+}
+
+.yoyaku-kakunin-info{
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: #374151;
+}
+
+/* 予約日 */
+.yoyaku-kakunin-datetime{
+    font-size: 20px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-top: 10px;
+}
+
+/* ボタンの枠組み */
+.yoyaku-kakunin-button-group{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 予約確定ボタン、戻るボタン */
+.yoyaku-kakunin-secondary-button,
+.yoyaku-kakunin-primary-button{
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* 予約確定ボタン */
+.yoyaku-kakunin-primary-button{
+    background-color: #2563eb;
+    color: white;
+}
+
+.yoyaku-kakunin-primary-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* 戻るボタン */
+.yoyaku-kakunin-secondary-button {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.yoyaku-kakunin-secondary-button:hover {
+    background-color: #d1d5db;
 }

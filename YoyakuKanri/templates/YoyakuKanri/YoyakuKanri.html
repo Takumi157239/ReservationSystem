@@ -3,19 +3,35 @@
 {% block title %}予約管理{% endblock %}
 
 {% block content %}
-    <h2>予約管理</h2>
 
-    <table class="product-table">
-        <th>ID</th>
-        <th>患者名</th>
-        <th>生年月日</th>
+    <h2 class="yoyaku-title">予約管理</h2>
 
-        {% for kanzyadata in kanzyadatas %}
-            <tr>
-                <td>{{ kanzyadata.ID }}</td>
-                <td>{{ kanzyadata.KANZYA_NAME }}</td>
-                <td>{{ kanzyadata.SEINENGAPPI }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="yoyaku-table-container">
+        <table class="yoyaku-table">
+
+            <th class="edit-column">編集</th>
+            <th>ID</th>
+            <th>患者名</th>
+            <th>次回予約日</th>
+            <th>受付日</th>
+            <th>備考</th>
+
+            {% for kanzyadata in kanzyadatas %}
+                <tr>
+                    <td>
+                        <a href="{% url 'KanzyaDataEdit' kanzyadata.pk %}">
+                            <button type="button" class="edit-column-button">編集</button>
+                        </a>
+                    </td>
+                    <td>{{ kanzyadata.ID }}</td>
+                    <td>{{ kanzyadata.KANZYA_NAME }}</td>
+                    <td>{{ kanzyadata.ZIKAI_YOYAKUBI|date:"Y年m月d日 H:i"|default:"" }}</td>
+                    <td>{{ kanzyadata.UKETSUKEBI|date:"Y年m月d日 H:i:s"|default:"" }}</td>
+                    <td>{{ kanzyadata.BIKOU|default:"" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
 {% endblock %}

@@ -6,10 +6,20 @@
 
         <div class="user-info">
             {% if user.is_authenticated %}
+
+                <form action="{% url 'Monshinhyou' %}" method="get" target="_blank">
+                    <button type="submit" class="hedder-button">問診票</button>
+                </form>
+
+                <form action="{% url 'Monshinhyou' %}" method="get" target="_blank">
+                    <button type="submit" class="hedder-button">受付</button>
+                </form>
+
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit">ログアウト</button>
+                    <button type="submit" class="hedder-button">ログアウト</button>
                 </form>
+
             {% endif %}
         </div>
     </div>

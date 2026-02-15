@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}次回予約{% endblock %}
+
+{% block content %}
+
+    <h2 class="zikaiyoyaku-title">{{ year }}年 {{ month }}月 予約表</h2>
+
+    <div class="zikaiyoyaku-month-move-container">
+        <a href="{% url 'ZikaiYoyaku' ID=ID year=prev_year month=prev_month%}">前月</a>
+        <a href="{% url 'ZikaiYoyaku' ID=ID year=next_year month=next_month%}">来月</a>
+    </div>
+    
+
+    <div class="zikaiyoyaku-table-wrapper">
+
+        <table class="zikaiyoyaku-table">
+            <thead>
+                <tr>
+                    <th>時間/日付</th>
+                    {% for day in days %}
+                        <th>{{ day }}<br>日</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in dict_yoyaku_table %}
+                <tr>
+                    <td class="zikaiyoyaku-time-cell">{{ row.slot|time:"H:i" }}</td>
+
+                    {% for cell in row.cells %}
+                        {% if cell.is_reserved %}
+                            <td class="zikaiyoyaku-slot-reserved"></td>
+                        {% else %}
+                            <td class="zikaiyoyaku-slot-available">
+                                <a href="{% url 'ZikaiYoyakuKakunin' ID year month cell.day row.slot.hour row.slot.minute %}">◯</a>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問診票</title>
+
+    <link rel="stylesheet" href="{% static 'css/Monshinhyou.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>問診票</h1>
+
+        <form method="post">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label">お名前</label>
+                {{ form.KANZYA_NAME }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">生年月日</label>
+                {{ form.SEINENGAPPI }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">メールアドレス</label>
+                {{ form.EMAIL_ADDRESS }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">来院理由</label>
+                <div class="checkbox-group">
+                    {{ form.RAIIN_RIYUU }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">上記でその他を選択された方</label>
+                {{ form.RAIIN_RIYUU_SONOTA }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">当院を知ったきっかけを教えてください</label>
+                <div class="checkbox-group">
+                    {{ form.ZYOUHOU_MOTO }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">上記でその他を選択された方</label>
+                {{ form.ZYOUHOU_MOTO_SONOTA }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">そのほか要望がございましたらご記入ください</label>
+                {{ form.SONOTA_YOUBOU }}
+            </div>
+
+            <button class="btn btn-primary">登録</button>
+
+        </form>
+    </div>
+
+
+</body>
+</html>

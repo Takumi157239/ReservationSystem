@@ -30,5 +30,22 @@ body {
 
 /* 右：ユーザー情報 */
 .user-info {
-    font-size: 14px;
+    display: flex;
+}
+
+/* 右：問診票・ログアウトボタン */
+.hedder-button{
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.2s;
+}
+
+.hedder-button:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }

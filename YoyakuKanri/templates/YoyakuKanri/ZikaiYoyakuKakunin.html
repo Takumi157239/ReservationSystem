@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}次回予約確認{% endblock %}
+
+{% block content %}
+
+    <div class="yoyaku-kakunin-body">
+        <div class="yoyaku-kakunin-card">
+
+            <h2>予約確認</h2>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="yoyaku-kakunin-info">
+                <p>ID: {{ ID }}</p>
+                <p>お名前：{{ KANZYA_NAME }}</p>
+                <p class="yoyaku-kakunin-datetime">日時: {{ ZikaiYoyakubi|date:"Y年m月d日 H:i" }}</p>
+            </div>
+
+            <form method="post" action="{% url 'ZikaiyoyakuKanryou' ID year month day hour minute %}">
+                {% csrf_token %}
+
+                <input type="hidden" name="ZikaiYoyakuID" value="{{ ID }}">
+                <input type="hidden" name="ZikaiYoyakubi" value="{{ ZIKAI_YOYAKUBI|date:'Y-m-d H:i:s' }}">
+
+                <div class="yoyaku-kakunin-button-group">
+                    <button type="button" class="yoyaku-kakunin-secondary-button" onclick="history.back()">
+                        戻る
+                    </button>
+
+                    <button type="submit" class="yoyaku-kakunin-primary-button" id="confirmBtn">
+                        予約確定
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+{% endblock %}

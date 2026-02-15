@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import time
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -116,6 +117,13 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # プロジェクト直下に static を置く場合
 ]
 
-
+# ログイン後の画面
 LOGIN_REDIRECT_URL = 'YoyakuKanri'
+
+# ログアウト後の画面
 LOGOUT_REDIRECT_URL = 'login'
+
+
+# 営業時間を宣言9:00～18:00
+RESERVATION_START_TIME = time(9, 0)
+RESERVATION_END_TIME = time(18, 00)

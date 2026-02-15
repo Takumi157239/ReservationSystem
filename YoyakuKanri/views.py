@@ -12,7 +12,33 @@ import calendar
 @login_required
 def index(request):
 
+    #すべての患者データを取得
     KanzyaData = T_KANZYA.objects.all()
+
+    #各検索条件を取得
+    OkyakusamaID = request.GET.get("OkyakusamaID")  #お客様ID
+    Kanzyamei = request.GET.get('Kanzyamei')        #患者名
+    YoyakubiS = request.GET.get('YoyakubiS')        #予約日Start
+    YoyakubiE = request.GET.get('YoyakubiE')        #予約日End
+    UketsukebiS = request.GET.get('UketsukebiS')    #受付日Start
+    UketsukebiE = request.GET.get('UketsukebiE')    #受付日End
+    
+    #お客様ID
+    if OkyakusamaID:
+        KanzyaData = KanzyaData.filter(ID__exact = OkyakusamaID)
+
+    #患者名
+    if Kanzyamei:
+        KanzyaData = KanzyaData.filter(KANZYA_NAME__contains = Kanzyamei)
+    
+    #予約日
+    if YoyakubiS and YoyakubiE:
+        KanzyaData = KanzyaData.filter(ZIKAI_YOYAKUBI__gte = YoyakubiS, ZIKAI_YOYAKUBI__lt = YoyakubiE)
+
+    #受付日
+    if UketsukebiS and UketsukebiE:
+        KanzyaData = KanzyaData.filter(UKETSUKEBI__gte = UketsukebiS, UKETSUKEBI__lt = UketsukebiE)
+
     return render(request, "YoyakuKanri/YoyakuKanri.html", {"kanzyadatas": KanzyaData})
 
 

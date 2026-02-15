@@ -1,6 +1,7 @@
 :root {
     /* タイトルやテーブルの余白を定義 */
     --yoyakugamen-yohaku: 10px;
+    --yoyakugamen-fontsize: 16px;
 }
 
 /* ここから予約管理画面 --------------------------*/
@@ -8,6 +9,46 @@
 /* 予約管理のタイトル */
 .yoyaku-title{
     margin-left: var(--yoyakugamen-yohaku);
+}
+
+/* 検索画面の枠組み */
+.yoyaku-search-container{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: var(--yoyakugamen-yohaku);
+}
+
+/* 各入力欄 */
+.yoyaku-inputbox{
+    display: block;
+    margin-right: 5px;
+    padding: 8px;
+    font-size: var(--yoyakugamen-fontsize);
+}
+
+/* 検索と全て表示ボタン */
+.yoyaku-serach-button{
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    padding: 8px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: var(--yoyakugamen-fontsize);
+}
+
+.yoyaku-serach-button:hover{
+    background-color: #34495e;
+}
+
+/* 本日の予約を表示ボタン枠組み */
+.yoyaku-honzitsu-show-container{
+    display: flex;             
+    justify-content: flex-end; 
+    gap: var(--yoyakugamen-yohaku);                 
 }
 
 /* 予約テーブルの枠組み */
@@ -27,6 +68,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     overflow: hidden;
+    font-size: var(--yoyakugamen-fontsize);
 }
 
 /* 編集ボタンの列 */
@@ -42,7 +84,7 @@
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
-    font-size: 0.9rem;
+    font-size: var(--yoyakugamen-fontsize);
     cursor: pointer;
     transition: 0.3s;
 }

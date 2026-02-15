@@ -6,7 +6,40 @@
 
     <h2 class="yoyaku-title">予約管理</h2>
 
-    <div class="yoyaku-table-container">
+    <form method="get" action="{% url 'YoyakuKanri' %}" class="yoyaku-search-container">
+        <div class="yoyaku-inputbox">
+            <label>お客様ID</label>
+            <input type="text" name="OkyakusamaID">
+        </div>
+
+        <div class="yoyaku-inputbox">
+            <label>患者名</label>
+            <input type="text" name="Kanzyamei">
+        </div>
+
+        <div class="yoyaku-inputbox">
+            <label>予約日</label>
+            <input type="datetime-local" name="YoyakubiS">
+            <label>～</label>
+            <input type="datetime-local" name="YoyakubiE">
+        </div>
+
+        <div class="yoyaku-inputbox">
+            <label>受付日</label>
+            <input type="datetime-local" name="UketsukebiS">
+            <label>～</label>
+            <input type="datetime-local" name="UketsukebiE">
+        </div>
+
+        <button type="submit" class="yoyaku-serach-button">検索</button>
+        <a href="{% url 'YoyakuKanri' %}"  class="yoyaku-serach-button">全件表示</a>
+    </form>
+
+    <div class="yoyaku-honzitsu-show-container">
+        <button type="button" class="yoyaku-serach-button" id="BtNowDateShow">本日の予約表示</button>
+    </div>
+
+    <div class="yoyaku-table-container-container">
         <table class="yoyaku-table">
 
             <th class="edit-column">編集</th>

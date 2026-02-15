@@ -59,7 +59,8 @@ class KanzyaDataForm(forms.ModelForm):
             "ZIKAI_YOYAKUBI": forms.DateTimeInput(
                 attrs={"type": "datetime-local", 
                        "class": CLASS_FORM_CONTROL,
-                       "step": "1800"
+                       "step": "1800",
+                       "readonly": "readonly"
                 }
             ),
             "UKETSUKEBI": forms.DateTimeInput(

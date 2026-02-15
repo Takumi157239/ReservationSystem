@@ -4,12 +4,14 @@ from .models import T_KANZYA
 from .forms import KanzyaDataForm
 from datetime import datetime, timedelta
 from django.conf import settings
+from common.QRCode import QRCodeOperation
 import calendar
 
 
 # 予約管理TOP
 @login_required
 def index(request):
+
     KanzyaData = T_KANZYA.objects.all()
     return render(request, "YoyakuKanri/YoyakuKanri.html", {"kanzyadatas": KanzyaData})
 
@@ -114,6 +116,13 @@ def ZikaiYoyakuKanryou(request, ID, year, month, day, hour, minute):
         obj = get_object_or_404(T_KANZYA, pk=ID)
         obj.ZIKAI_YOYAKUBI = ZikaiYoyakubi
         obj.save()
+
+        
+        # QRコードをメールで送る処理
+        with QRCodeOperation() as qrCodeOperation:
+            qrCodeOperation.QRCodeCreate(ID)                                     #QRコード生成
+            qrCodeOperation.QRCodeSendMail(obj.EMAIL_ADDRESS, ZikaiYoyakubi)     #メール送信
+
 
         return redirect("KanzyaDataEdit", ID)
 

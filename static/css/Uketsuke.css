@@ -1,0 +1,67 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* 中央配置用コンテナ */
+.bt-uketsuke-container {
+    height: 100%;
+    display: flex;
+    justify-content: center; /* 横中央 */
+    align-items: center;     /* 縦中央 */
+}
+
+/* 受付はこちらをタップしてくださいボタン */
+.bt-uketsuke {
+    padding: 50px 80px;
+    font-size: 36px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bt-uketsuke:hover {
+    background-color: #45a049;
+}
+
+/* QRコード読み込み画面のコンテナ */
+.uketsuke-reader-container{
+    display: block;
+}
+
+/* QRコード読み込み画面 */
+.uketsuke-reader{
+    width: 500px;
+    display: none;
+}
+
+/* キャンセルボタンのコンテナ */
+.bt-uketsuke-cancel-container{
+    display: flex;             
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* キャンセルボタン */
+.bt-uketsuke-cancel{
+    display: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #ff4d4d, #d93636);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bt-uketsuke-cancel:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ff3333, #cc0000);
+}

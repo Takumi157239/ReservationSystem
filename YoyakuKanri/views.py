@@ -1,3 +1,5 @@
+import calendar
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import T_KANZYA
@@ -5,8 +7,7 @@ from .forms import KanzyaDataForm
 from datetime import datetime, timedelta
 from django.conf import settings
 from common.QRCode import QRCodeOperation
-import calendar
-
+from django.http import JsonResponse
 
 # 予約管理TOP
 @login_required
@@ -61,6 +62,27 @@ def MonshinhyouCreate(request):
 def MonshinhyouClose(request):
     return render(request, "YoyakuKanri/MonshinhyouClose.html")
 
+
+# 受付画面
+@login_required
+def Uketsuke(request):
+    return render(request, "YoyakuKanri/Uketsuke.html")
+
+
+# 受付完了
+@login_required
+def UketsukeKanryou(request):
+
+    if request.method == "POST":
+
+        data = json.loads(request.body)
+        qr_value = data.get("qr_value")
+
+        obj = get_object_or_404(T_KANZYA, pk=qr_value)
+        obj.UKETSUKEBI = datetime.now()
+        obj.save()
+
+        return JsonResponse({"status": "受付が完了しました"})
 
 # 患者データ編集画面
 @login_required
@@ -145,8 +167,8 @@ def ZikaiYoyakuKanryou(request, ID, year, month, day, hour, minute):
 
         
         # QRコードをメールで送る処理
-        with QRCodeOperation() as qrCodeOperation:
-            qrCodeOperation.QRCodeCreate(ID)                                     #QRコード生成
+        with QRCodeOperation(ID) as qrCodeOperation:
+            qrCodeOperation.QRCodeCreate()                                       #QRコード生成
             qrCodeOperation.QRCodeSendMail(obj.EMAIL_ADDRESS, ZikaiYoyakubi)     #メール送信
 
 

@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受付</title>
+
+    <link rel="stylesheet" href="{% static 'css/Uketsuke.css' %}?v=20260217">
+
+    <script src="{% static 'js/Uketsuke.js' %}"></script>
+
+    <!-- QRコード読み取りライブラリ -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+
+<body>
+
+    <div class="bt-uketsuke-container">
+
+        <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+        
+        <button class="bt-uketsuke" id="bt-uketsuke">受付はこちらをタップしてください</button>
+
+        <div class="uketsuke-reader-container">
+            <div id="uketsuke-reader" class="uketsuke-reader"></div>
+            <div class="bt-uketsuke-cancel-container">
+                <button id="bt-uketsuke-cancel" class="bt-uketsuke-cancel">キャンセル</button>
+            </div>
+        </div>
+
+    </div>
+
+</body>

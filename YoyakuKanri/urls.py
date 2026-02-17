@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name='YoyakuKanri'),
     path('Monshinhyou', views.MonshinhyouCreate, name='Monshinhyou'),
+    path('Uketsuke', views.Uketsuke, name='Uketsuke'),
+    path('UketsukeKanryou', views.UketsukeKanryou, name="UketsukeKanryou"),
     path('MonshinhyouClose', views.MonshinhyouClose, name='MonshinhyouClose'),
     path('KanzyaDataEdit/<int:pk>/', views.KanzyaDataEdit, name='KanzyaDataEdit'),
     path('ZikaiYoyaku/<int:ID>/<int:year>/<int:month>/', views.ZikaiYoayakuShow, name="ZikaiYoyaku"),

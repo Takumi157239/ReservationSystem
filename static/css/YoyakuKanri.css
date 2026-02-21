@@ -248,6 +248,11 @@
     margin-left: var(--yoyakugamen-yohaku);
 }
 
+/* 患者名表示 */
+.zikaiyoyaku-kanzya-name{
+    margin-left: var(--yoyakugamen-yohaku);
+}
+
 /* 来月へと前月へのaタグの枠組み */
 .zikaiyoyaku-month-move-container{
     display: flex;
@@ -271,8 +276,13 @@
     padding: 8px;
 }
 
-.zikaiyoyaku-table th {
+.zikaiyoyaku-heizitsu {
     background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+.zikaiyoyaku-yasumi{
+    background-color: #DDEEFF;
     font-weight: 600;
 }
 

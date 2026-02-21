@@ -7,6 +7,10 @@
         <div class="user-info">
             {% if user.is_authenticated %}
 
+                <form action="{% url 'YoyakuKanri' %}" method="get">
+                    <button type="submit" class="hedder-button">予約管理</button>
+                </form>
+
                 <form action="{% url 'Monshinhyou' %}" method="get" target="_blank">
                     <button type="submit" class="hedder-button">問診票</button>
                 </form>

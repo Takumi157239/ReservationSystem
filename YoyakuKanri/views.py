@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import T_KANZYA
 from .forms import KanzyaDataForm
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.conf import settings
 from common.QRCode import QRCodeOperation
 from django.http import JsonResponse
@@ -111,6 +111,9 @@ def ZikaiYoayakuShow(request, ID, year, month):
     # 当月の予約されている日と時間を取得する
     dict_yoyaku_table = GetMonthYoyakubiTable(year, month, dict_time_slots["time_slots"], dict_time_slots["days"])
 
+    # 患者名を取得する
+    KANZYA_DATA = T_KANZYA.objects.get(pk=ID)
+
     # 画面に渡すデータを辞書型に格納
     context = {
         "ID": ID,
@@ -121,6 +124,7 @@ def ZikaiYoayakuShow(request, ID, year, month):
         "prev_month": dict_time_slots["prev_month"],
         "next_year": dict_time_slots["next_year"],
         "next_month": dict_time_slots["next_month"],
+        "KANZYA_NAME": KANZYA_DATA.KANZYA_NAME,
         "dict_yoyaku_table": dict_yoyaku_table
     }
 
@@ -196,8 +200,15 @@ def GetTimeSlots(argYear, argMonth):
         next_month = argMonth + 1
 
     # 月の日数取得
+    days = []
+    weekday_jp = ["(月)", "(火)", "(水)", "(木)", "(金)", "(土)", "(日)"]
     _, last_day = calendar.monthrange(argYear, argMonth)
-    days = list(range(1, last_day + 1))
+    for day in range(1, last_day + 1):
+        d = date(argYear, argMonth, day)
+        days.append({
+            "day": day,
+            "weekday": weekday_jp[d.weekday()],
+        })
 
     # 30分刻み生成
     start_time = settings.RESERVATION_START_TIME
@@ -240,11 +251,12 @@ def GetMonthYoyakubiTable(argYear, argMonth, argSlots, argDays):
 
     for slot in argSlots:
         row = []
-        for day in argDays:
-            dt = datetime(argYear, argMonth, day, slot.hour, slot.minute)
+        for d in argDays:
+            dt = datetime(argYear, argMonth, int(d["day"]), slot.hour, slot.minute)
             is_reserved = YoyakubiTimes.filter(ZIKAI_YOYAKUBI=dt).exists()
             row.append({
-                "day": day,
+                "day": int(d["day"]),
+                "weekday": d["weekday"],
                 "slot": slot,
                 "is_reserved": is_reserved,
             })

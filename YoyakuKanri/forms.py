@@ -11,7 +11,7 @@ class KanzyaDataForm(forms.ModelForm):
     def clean_ZIKAI_YOYAKUBI(self):
         dt = self.cleaned_data['ZIKAI_YOYAKUBI']
 
-        if dt is None:
+        if dt is not None:
             # 土日チェック（0=月曜, 6=日曜）
             if dt.weekday() >= 5:
                 raise forms.ValidationError("土日は予約できません。")

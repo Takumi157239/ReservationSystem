@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='t_kanzya',
             name='RAIIN_RIYUU',
-            field=models.JSONField(blank=True, null=True),
+            field=models.TextField(blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='t_kanzya',
@@ -28,6 +28,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='t_kanzya',
             name='ZYOUHOU_MOTO',
-            field=models.JSONField(blank=True, null=True),
+            field=models.TextField(blank=True, null=True),
         ),
     ]

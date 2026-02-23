@@ -11,13 +11,14 @@ class KanzyaDataForm(forms.ModelForm):
     def clean_ZIKAI_YOYAKUBI(self):
         dt = self.cleaned_data['ZIKAI_YOYAKUBI']
 
-        # 土日チェック（0=月曜, 6=日曜）
-        if dt.weekday() >= 5:
-            raise forms.ValidationError("土日は予約できません。")
+        if dt is None:
+            # 土日チェック（0=月曜, 6=日曜）
+            if dt.weekday() >= 5:
+                raise forms.ValidationError("土日は予約できません。")
 
-        # 時間チェック（9:00〜18:00）
-        if dt.time() < settings.RESERVATION_START_TIME or dt.time() > settings.RESERVATION_END_TIME:
-            raise forms.ValidationError("予約時間は9:00〜18:00の間で指定してください。")
+            # 時間チェック（9:00〜18:00）
+            if dt.time() < settings.RESERVATION_START_TIME or dt.time() > settings.RESERVATION_END_TIME:
+                raise forms.ValidationError("予約時間は9:00〜18:00の間で指定してください。")
 
         return dt
     

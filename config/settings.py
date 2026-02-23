@@ -14,10 +14,14 @@ from pathlib import Path
 from datetime import time
 from decouple import config, Csv
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -26,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="", cast=Csv())
 
@@ -77,18 +81,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': config('DATABASES_ENGINE'),
-        'NAME': config('DATABASES_NAME'),
-        'USER': config('DATABASES_USER'),
-        'PASSWORD': config('DATABASES_PASSWORD'),
-        'HOST': config('DATABASES_HOST'),
-        'PORT': config('DATABASES_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': config('DATABASES_ENGINE'),
+    #     'NAME': config('DATABASES_NAME'),
+    #     'USER': config('DATABASES_USER'),
+    #     'PASSWORD': config('DATABASES_PASSWORD'),
+    #     'HOST': config('DATABASES_HOST'),
+    #     'PORT': config('DATABASES_PORT'),
+    # }
 }
 
 

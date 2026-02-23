@@ -13,16 +13,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='t_kanzya',
             name='RAIIN_RIYUU_SONOTA',
-            field=models.TextField(null=True),
+            field=models.TextField(null=True, blank=True),
         ),
         migrations.AlterField(
             model_name='t_kanzya',
             name='SONOTA_YOUBOU',
-            field=models.TextField(null=True),
+            field=models.TextField(null=True, blank=True),
         ),
         migrations.AlterField(
             model_name='t_kanzya',
             name='ZYOUHOU_MOTO_SONOTA',
-            field=models.TextField(null=True),
+            field=models.TextField(null=True, blank=True),
         ),
     ]

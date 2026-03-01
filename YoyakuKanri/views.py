@@ -2,8 +2,8 @@ import calendar
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import T_KANZYA
-from .forms import KanzyaDataForm
+from .models import T_KANZYA, M_SHIKAISHI
+from .forms import KanzyaDataForm, ShikaishiDataForm
 from datetime import datetime, timedelta, date
 from django.conf import settings
 from common.QRCode import QRCodeOperation
@@ -177,6 +177,49 @@ def ZikaiYoyakuKanryou(request, ID, year, month, day, hour, minute):
 
 
         return redirect("KanzyaDataEdit", ID)
+
+
+
+# 歯科医師データ画面-----------------------------------------------------------------------------
+
+# 歯科医師リスト表示
+@login_required
+def ShikaishiList(request):
+
+    # 歯科医師データ取得
+    ShikaishiData = M_SHIKAISHI.objects.all()
+
+    return render(request, "Shikaishi/ShikaishiList.html", {"ShikaishiDatas": ShikaishiData})
+
+
+# 歯科医師編集画面
+@login_required
+def ShikaishiEdit(request, add_or_edit=-1, ID=-1):
+
+    if request.method == "POST":
+
+        if add_or_edit == 0:
+            form = ShikaishiDataForm(request.POST)
+
+        else:
+            ShikaishiData = M_SHIKAISHI.objects.get(pk=ID)
+            form = ShikaishiDataForm(request.POST, instance=ShikaishiData)
+
+        if form.is_valid():
+            form.save()
+            return redirect("ShikaishiList")  # 保存後、一覧へ戻る
+    else:
+
+        # 新規登録
+        if add_or_edit == 0:
+            form = ShikaishiDataForm()
+        
+        # 編集
+        else:
+            ShikaishiData = M_SHIKAISHI.objects.get(pk=ID)
+            form = ShikaishiDataForm(instance=ShikaishiData)
+
+        return render(request, "Shikaishi/ShikaishiEdit.html", {"form": form, "add_or_edit": add_or_edit})
 
 
 # ここからは関数----------------------------------------------------------------------------

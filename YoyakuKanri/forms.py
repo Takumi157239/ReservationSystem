@@ -1,5 +1,5 @@
 from django import forms
-from .models import T_KANZYA, RAIIN_RIYUU_CHOICES, ZYOUHOU_MOTO_CHOICES
+from .models import T_KANZYA, M_SHIKAISHI, RAIIN_RIYUU_CHOICES, ZYOUHOU_MOTO_CHOICES
 from datetime import time
 from django.conf import settings
 
@@ -43,9 +43,7 @@ class KanzyaDataForm(forms.ModelForm):
         CLASS_FORM_CONTROL = "form-control"
 
         model = T_KANZYA
-        fields = ["KANZYA_NAME", "SEINENGAPPI", "EMAIL_ADDRESS", "RAIIN_RIYUU", "RAIIN_RIYUU_SONOTA", 
-                  "ZYOUHOU_MOTO", "ZYOUHOU_MOTO_SONOTA", "TANTOU_SHIKAISHI_ID", "SONOTA_YOUBOU",
-                  "ZIKAI_YOYAKUBI", "UKETSUKEBI", "BIKOU"]
+        fields = '__all__'
 
         widgets = {
             "SEINENGAPPI": forms.DateInput(
@@ -71,4 +69,10 @@ class KanzyaDataForm(forms.ModelForm):
             )
         }
 
+class ShikaishiDataForm(forms.ModelForm):
 
+    # 入力フォームの指定
+    class Meta:
+
+        model = M_SHIKAISHI
+        fields = '__all__'

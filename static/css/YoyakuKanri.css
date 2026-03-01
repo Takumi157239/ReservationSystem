@@ -177,7 +177,8 @@
 .edit-form-group input[type="date"],
 .edit-form-group input[type="email"],
 .edit-form-group input[type="datetime-local"],
-.edit-form-group textarea{
+.edit-form-group textarea,
+.edit-form-group select{
     width: 100%;
     padding: 10px;
     border: 1px solid #ccd6dd;

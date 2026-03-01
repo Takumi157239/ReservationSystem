@@ -1,0 +1,54 @@
+
+/* 歯科医師テーブルの枠組み */
+.shikaishi-table-container{
+    width: 90%;
+    margin: 40px auto;
+    overflow-x: auto;
+}
+
+/* 歯科医師新規登録ボタンの枠組み */
+.shikaishi-shinkitouroku-container{
+    display: flex;             
+    justify-content: flex-end; 
+}
+
+/* テーブル */
+.shikaishi-table{
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    font-size: 15px;
+}
+
+/* ヘッダー */
+.shikaishi-table thead {
+  background: linear-gradient(135deg, #6ec6ff, #42a5f5);
+  color: white;
+}
+
+.shikaishi-table th {
+  padding: 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* セル */
+.shikaishi-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* 偶数行 */
+.shikaishi-table tbody tr:nth-child(even) {
+  background-color: #f8fbff;
+}
+
+/* ホバー効果 */
+.shikaishi-table tbody tr:hover {
+  background-color: #e3f2fd;
+  transition: 0.2s ease;
+}

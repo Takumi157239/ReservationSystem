@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}歯科医師リスト編集{% endblock %}
+
+{% block content %}
+
+<div class="edit-container">
+
+    <h2>歯科医師データ編集</h2>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div class="edit-form-button-box">
+            <button class="edit-form-save-button" type="submit">保存</button>
+            <a href="{% url 'ShikaishiList' %}" class="edit-form-back-button" >戻る</a>
+        </div>
+
+        <div class="edit-form-group">
+            <label class="edit-form-label">歯科医師</label>
+            {{ form.SHIKAI_NAME }}
+        </div>
+
+        <div class="edit-form-group">
+            <label class="edit-form-label">役職</label>
+            {{ form.YAKUSHOKU }}
+        </div>
+
+
+
+    </form>
+
+</div>
+
+{% endblock %}

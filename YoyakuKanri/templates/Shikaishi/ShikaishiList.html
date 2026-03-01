@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}歯科医師リスト{% endblock %}
+
+{% block content %}
+
+    <div class="shikaishi-table-container">
+
+        <h2>歯科医師リスト</h2>
+
+        <div class="shikaishi-shinkitouroku-container">
+            <a href="{% url 'ShikaishiEdit' 0 0 %}">
+                <button type="button" class="edit-column-button">新規登録</button>
+            </a>
+        </div>
+
+        <br>
+
+        <table class="shikaishi-table">
+
+            <thead>
+                <tr>
+                    <th class="edit-column"></th>
+                    <th>歯科医師</th>
+                    <th>役職</th>
+                </tr>
+            </thead>
+
+            {% for ShikaishiData in ShikaishiDatas %}
+                <tr>
+                    <td>
+                        <a href="{% url 'ShikaishiEdit' ID=ShikaishiData.ID add_or_edit=1 %}">
+                            <button type="button" class="edit-column-button">編集</button>
+                        </a>
+                    </td>
+                    <td>{{ShikaishiData.SHIKAI_NAME}}</td>
+                    <td>{{ShikaishiData.get_YAKUSHOKU_display}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    
+
+{% endblock %}

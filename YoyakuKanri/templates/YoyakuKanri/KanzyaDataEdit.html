@@ -4,105 +4,138 @@
 
 {% block content %}
 
-    <div class="edit-container">
+    <br>
 
-        <h2>患者データ編集</h2>
+    <div class="edit-form-button-box">
+        {% now "Y" as current_year %}
+        {% now "n" as current_month %}
 
-        <form method="post">
-
-            {% csrf_token %}
-            
-            <div class="edit-form-button-box">
-                <button class="edit-form-save-button" type="submit">保存</button>
-
-                {% now "Y" as current_year %}
-                {% now "n" as current_month %}
-
-                <a href="{% url 'ZikaiYoyaku' ID=object.ID year=current_year month=current_month%}" class="edit-form-zikaiyoyaku-button">次回予約</a>
-                <a href="{% url 'YoyakuKanri' %}" class="edit-form-back-button" >戻る</a>
-            </div>
-
-            <br><br>
-
-            <div class="customer-id-box">
-                <label class="customer-id-label">お客様ID</label>
-                <div class="customer-id-value">{{ object.ID }}</div>
-            </div>
-
-            <br>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">お名前</label>
-                {{ form.KANZYA_NAME }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">生年月日</label>
-                {{ form.SEINENGAPPI }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">メールアドレス</label>
-                {{ form.EMAIL_ADDRESS }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">担当者</label>
-                {{ form.SHIKAISHI }}
-            </div>
-
-            <div class="edit-form-group">
-
-                <label class="edit-form-label">次回予約日</label>
-                {{ form.ZIKAI_YOYAKUBI }}
-
-                {% if form.ZIKAI_YOYAKUBI.errors %}
-                    <div class="edit-form-error-message">
-                        {{ form.ZIKAI_YOYAKUBI.errors }}
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">受付日</label>
-                {{ form.UKETSUKEBI }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">来院理由</label>
-                <div class="edit-checkbox-group">
-                    {{ form.RAIIN_RIYUU }}
-                </div>
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">来院理由その他</label>
-                {{ form.RAIIN_RIYUU_SONOTA }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">当院を知ったきっかけ</label>
-                <div class="edit-checkbox-group">
-                    {{ form.ZYOUHOU_MOTO }}
-                </div>
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">当院を知ったきっかけその他</label>
-                {{ form.ZYOUHOU_MOTO_SONOTA }}
-            </div>
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">その他要望</label>
-                {{ form.SONOTA_YOUBOU }}
-            </div>
-
-
-            <div class="edit-form-group">
-                <label class="edit-form-label">備考</label>
-                {{ form.BIKOU }}
-            </div>
-        </form>
+        <a href="{% url 'ZikaiYoyaku' ID=object.ID year=current_year month=current_month%}" class="edit-form-zikaiyoyaku-button">次回予約</a>
+        <a href="{% url 'YoyakuKanri' %}" class="edit-form-back-button" >戻る</a>
     </div>
+
+    <div class="edit-kanzyadata-container">
+
+        <div class="edit-container">
+
+            <h2>患者データ編集</h2>
+
+            <form method="post">
+
+                {% csrf_token %}
+                
+                <div class="edit-form-button-box">
+                    <button class="edit-form-save-button" type="submit">保存</button>
+                </div>
+
+                <br><br>
+
+                <div class="customer-id-box">
+                    <label class="customer-id-label">お客様ID</label>
+                    <div class="customer-id-value">{{ object.ID }}</div>
+                </div>
+
+                <br>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">お名前</label>
+                    {{ form.KANZYA_NAME }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">生年月日</label>
+                    {{ form.SEINENGAPPI }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">メールアドレス</label>
+                    {{ form.EMAIL_ADDRESS }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">担当者</label>
+                    {{ form.SHIKAISHI }}
+                </div>
+
+                <div class="edit-form-group">
+
+                    <label class="edit-form-label">次回予約日</label>
+                    {{ form.ZIKAI_YOYAKUBI }}
+
+                    {% if form.ZIKAI_YOYAKUBI.errors %}
+                        <div class="edit-form-error-message">
+                            {{ form.ZIKAI_YOYAKUBI.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">受付日</label>
+                    {{ form.UKETSUKEBI }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">来院理由</label>
+                    <div class="edit-checkbox-group">
+                        {{ form.RAIIN_RIYUU }}
+                    </div>
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">来院理由その他</label>
+                    {{ form.RAIIN_RIYUU_SONOTA }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">当院を知ったきっかけ</label>
+                    <div class="edit-checkbox-group">
+                        {{ form.ZYOUHOU_MOTO }}
+                    </div>
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">当院を知ったきっかけその他</label>
+                    {{ form.ZYOUHOU_MOTO_SONOTA }}
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">その他要望</label>
+                    {{ form.SONOTA_YOUBOU }}
+                </div>
+
+
+                <div class="edit-form-group">
+                    <label class="edit-form-label">備考</label>
+                    {{ form.BIKOU }}
+                </div>
+            </form>
+        </div>
+
+        <div class="edit-container">
+            <h2>受診歴一覧</h2>
+            
+            <table class="jushinreki-table">
+                <th></th>
+                <th>受診日</th>
+                <th>受診タイトル</th>
+                <th>担当歯科医師</th>
+
+                {% for jushinreki in jushinDatas %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'JushinrekiEdit' jushinreki.ID %}">
+                                <button type="button" class="edit-column-button">編集</button>
+                            </a>
+                        </td>
+                        <td>{{ jushinreki.JUSHINBI }}</td>
+                        <td>{{ jushinreki.JUSHIN_TITLE|default:"" }}</td>
+                        <td>{{ jushinreki.SHIKAISHI|default:"" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
 
 {% endblock %}

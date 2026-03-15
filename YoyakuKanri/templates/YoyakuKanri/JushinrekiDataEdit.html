@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}受診歴編集{% endblock %}
+
+{% block content %}
+
+    <div class="jushinreki-edit-container">
+
+        <h2>受診歴編集</h2>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="edit-form-button-box">
+                <button class="edit-form-save-button" type="submit">保存</button>
+                <a href="{% url 'KanzyaDataEdit' JushinData.KANZYA_ID %}" class="edit-form-back-button" >戻る</a>
+            </div>
+
+            <div style="display: none;">{{ form.KANZYA_ID }}</div>
+
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">受診日</label>
+                {{ form.JUSHINBI }}
+            </div>
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">受診タイトル</label>
+                {{ form.JUSHIN_TITLE }}
+            </div>
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">受診理由</label>
+                {{ form.JUSHIN_RIYUU }}
+            </div>
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">処置内容</label>
+                {{ form.SHOCHI_NAIYOU }}
+            </div>
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">料金全額</label>
+                {{ form.RYOUKIN_ZENGAKU }}
+            </div>
+
+            <div class="jushinreki-edit-form-group">
+                <label class="edit-form-label">患者負担</label>
+                {{ form.RYOUKIN_KANZYAFUTAN }}
+            </div>
+
+        </form>
+
+
+    </div>
+
+{% endblock %}

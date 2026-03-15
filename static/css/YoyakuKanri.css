@@ -126,13 +126,16 @@
 /* ここから編集画面 --------------------------*/
 
 /* 編集画面の枠組み */
+.edit-kanzyadata-container{
+    display: flex;
+    justify-content: center;
+}
+
+/* 編集画面の枠組み */
 .edit-container{
-    max-width: 600px;
-    margin: 40px auto;
+    width: 100%;
     background: #ffffff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 入力欄枠組み */
@@ -233,6 +236,37 @@
 /* エラーメッセージ */
 .edit-form-error-message{
     color: red;
+}
+
+/* 受信歴テーブル */
+.jushinreki-table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: var(--yoyakugamen-fontsize);
+}
+
+.jushinreki-table th,
+.jushinreki-table td {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+
+/* ここから受診歴編集画面------------------------ */
+.jushinreki-edit-container{
+    width: 100%;
+}
+
+.jushinreki-edit-container h2{
+    padding-left: 20px;
+}
+
+.jushinreki-edit-form-group{
+    padding-left: 30px;
 }
 
 

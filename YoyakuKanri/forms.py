@@ -1,11 +1,16 @@
 from django import forms
-from .models import T_KANZYA, M_SHIKAISHI, RAIIN_RIYUU_CHOICES, ZYOUHOU_MOTO_CHOICES
+from .models import T_KANZYA, M_SHIKAISHI, T_JUSHINREKI, RAIIN_RIYUU_CHOICES, ZYOUHOU_MOTO_CHOICES
 from datetime import time
 from django.conf import settings
+
+# HTMLで定義するクラスを定義
+CLASS_FORM_CONTROL = "form-control"
 
 
 # 患者データフォーム
 class KanzyaDataForm(forms.ModelForm):
+
+
 
     # 次回予約日の入力チェック
     def clean_ZIKAI_YOYAKUBI(self):
@@ -38,9 +43,6 @@ class KanzyaDataForm(forms.ModelForm):
     
     # 入力フォームの指定
     class Meta:
-
-        # HTMLで定義するクラスを定義
-        CLASS_FORM_CONTROL = "form-control"
 
         model = T_KANZYA
         fields = '__all__'
@@ -76,3 +78,20 @@ class ShikaishiDataForm(forms.ModelForm):
 
         model = M_SHIKAISHI
         fields = '__all__'
+
+
+class JushinrekiDataForm(forms.ModelForm):
+
+    class Meta:
+
+        model = T_JUSHINREKI
+        fields = '__all__'
+
+        widgets = {
+            "JUSHINBI": forms.DateInput(
+                attrs={"type": "date", 
+                    "class": CLASS_FORM_CONTROL,
+                    "placeholder": "例：1990/01/01"
+                }
+            )
+        }

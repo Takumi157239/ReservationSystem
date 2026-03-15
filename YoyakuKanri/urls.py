@@ -14,5 +14,6 @@ urlpatterns = [
     path('ZikaiyoyakuKanryou/<int:ID>/<int:year>/<int:month>/<int:day>/<int:hour>/<int:minute>', 
           views.ZikaiYoyakuKanryou, name="ZikaiyoyakuKanryou"),
     path('ShikaishiList', views.ShikaishiList, name='ShikaishiList'),
-    path('ShikaishiEdit/<int:ID>/<int:add_or_edit>', views.ShikaishiEdit, name='ShikaishiEdit')
+    path('ShikaishiEdit/<int:ID>/<int:add_or_edit>', views.ShikaishiEdit, name='ShikaishiEdit'),
+    path('JushinrekiEdit/<int:ID>', views.JushinrekiEdit, name='JushinrekiEdit')
 ]

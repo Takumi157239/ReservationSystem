@@ -46,6 +46,7 @@ class T_KANZYA(models.Model):
     UPDATE_DATE = models.DateTimeField(auto_now=True)
     CREATE_DATE = models.DateTimeField(auto_now_add=True)
 
+    # 歯科医師名紐づけ
     SHIKAISHI = models.ForeignKey(
         M_SHIKAISHI,
         on_delete= models.DO_NOTHING,
@@ -66,13 +67,24 @@ class T_KANZYA(models.Model):
 class T_JUSHINREKI(models.Model):
     ID = models.AutoField(primary_key=True)
     KANZYA_ID = models.IntegerField()
-    SHIKAISHI_ID = models.IntegerField()
     JUSHINBI = models.DateField()
-    JUSHIN_RIYUU = models.TextField()
-    RYOUKIN_ZENGAKU = models.DecimalField(max_digits=10, decimal_places=2)
-    RYOUKIN_KANZYAFUTAN = models.DecimalField(max_digits=10, decimal_places=2)
+    JUSHIN_TITLE = models.CharField(max_length=128, null=True, blank=True)
+    JUSHIN_RIYUU = models.TextField(null=True, blank=True)
+    SHOCHI_NAIYOU = models.TextField(null=True, blank=True)
+    RYOUKIN_ZENGAKU = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    RYOUKIN_KANZYAFUTAN = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     UPDATE_DATE = models.DateTimeField(auto_now=True)
     CREATE_DATE = models.DateTimeField(auto_now_add=True)
+
+    # 歯科医師名紐づけ
+    SHIKAISHI = models.ForeignKey(
+        M_SHIKAISHI,
+        on_delete= models.DO_NOTHING,
+        to_field='ID',
+        db_column='SHIKAISHI_ID',
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         db_table = "T_JUSHINREKI"

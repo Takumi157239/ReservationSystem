@@ -2,8 +2,8 @@ import calendar
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import T_KANZYA, M_SHIKAISHI
-from .forms import KanzyaDataForm, ShikaishiDataForm
+from .models import T_KANZYA, M_SHIKAISHI, T_JUSHINREKI
+from .forms import KanzyaDataForm, ShikaishiDataForm, JushinrekiDataForm
 from datetime import datetime, timedelta, date
 from django.conf import settings
 from common.QRCode import QRCodeOperation
@@ -50,7 +50,11 @@ def MonshinhyouCreate(request):
     if request.method == "POST":
         form = KanzyaDataForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_kanzya = form.save()
+
+            # 受信歴に新規レコード追加
+            T_JUSHINREKI.objects.create(KANZYA_ID=new_kanzya.ID, JUSHINBI=datetime.now().date())
+
             return redirect("MonshinhyouClose")
     else:
         form = KanzyaDataForm()
@@ -78,9 +82,16 @@ def UketsukeKanryou(request):
         data = json.loads(request.body)
         qr_value = data.get("qr_value")
 
+        # 現在日付を受付日とする
+        now = datetime.now()
+
+        # 受付日の登録
         obj = get_object_or_404(T_KANZYA, pk=qr_value)
-        obj.UKETSUKEBI = datetime.now()
+        obj.UKETSUKEBI = now
         obj.save()
+
+        # 受験歴に受付した日付を登録する
+        T_JUSHINREKI.objects.create(KANZYA_ID=qr_value, JUSHINBI=now.date())
 
         return JsonResponse({"status": "受付が完了しました"})
 
@@ -89,6 +100,7 @@ def UketsukeKanryou(request):
 def KanzyaDataEdit(request, pk):
 
     obj = T_KANZYA.objects.get(pk=pk)
+    JushinData = T_JUSHINREKI.objects.filter(KANZYA_ID=pk)
 
     if request.method == "POST":
         form = KanzyaDataForm(request.POST, instance=obj)
@@ -98,7 +110,24 @@ def KanzyaDataEdit(request, pk):
     else:
         form = KanzyaDataForm(instance=obj)
     
-    return render(request, "YoyakuKanri/KanzyaDataEdit.html", {"form": form, 'object': obj})
+    return render(request, "YoyakuKanri/KanzyaDataEdit.html", {"form": form, 'object': obj, 'jushinDatas': JushinData })
+
+
+# 受診歴編集画面
+@login_required
+def JushinrekiEdit(request, ID):
+
+    JushinData = T_JUSHINREKI.objects.get(ID=ID)
+
+    if request.method == "POST":
+        form = JushinrekiDataForm(request.POST, instance=JushinData)
+        if form.is_valid():
+            form.save()
+            return redirect("KanzyaDataEdit", JushinData.KANZYA_ID)  # 保存後、患者データ編集画面へ戻る
+    else:
+        form = JushinrekiDataForm(instance=JushinData)
+
+    return render(request, "YoyakuKanri/JushinrekiDataEdit.html", {"form": form, 'JushinData': JushinData})
 
 
 # 次回予約画面
@@ -167,6 +196,7 @@ def ZikaiYoyakuKanryou(request, ID, year, month, day, hour, minute):
 
         obj = get_object_or_404(T_KANZYA, pk=ID)
         obj.ZIKAI_YOYAKUBI = ZikaiYoyakubi
+        obj.UKETSUKEBI = None
         obj.save()
 
         

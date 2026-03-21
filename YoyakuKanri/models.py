@@ -71,8 +71,8 @@ class T_JUSHINREKI(models.Model):
     JUSHIN_TITLE = models.CharField(max_length=128, null=True, blank=True)
     JUSHIN_RIYUU = models.TextField(null=True, blank=True)
     SHOCHI_NAIYOU = models.TextField(null=True, blank=True)
-    RYOUKIN_ZENGAKU = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    RYOUKIN_KANZYAFUTAN = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    RYOUKIN_ZENGAKU = models.DecimalField(max_digits=10, decimal_places=0, null=True, blank=True)
+    RYOUKIN_KANZYAFUTAN = models.DecimalField(max_digits=10, decimal_places=0, null=True, blank=True)
     UPDATE_DATE = models.DateTimeField(auto_now=True)
     CREATE_DATE = models.DateTimeField(auto_now_add=True)
 
@@ -88,26 +88,3 @@ class T_JUSHINREKI(models.Model):
 
     class Meta:
         db_table = "T_JUSHINREKI"
-
-
-# 予約保存データ
-class T_YOYAKU(models.Model):
-    ID = models.AutoField(primary_key=True,unique=True)
-    KANZYA_ID = models.IntegerField()
-    YOYAKUBI = models.DateTimeField()
-    UKETSUKEBI = models.DateTimeField(null=True)
-    UPDATE_DATE = models.DateTimeField(auto_now=True)
-    CREATE_DATE = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        db_table = "T_YOYAKU"
-
-
-# コンボボックス値
-class M_CMB_ITEM(models.Model):
-    ID = models.AutoField(primary_key=True)
-    CMB_TYPE = models.CharField(max_length=128)
-    CMB_VALUE = models.CharField(max_length=128)
-
-    class Meta:
-        db_table = "M_CMB_ITEM"

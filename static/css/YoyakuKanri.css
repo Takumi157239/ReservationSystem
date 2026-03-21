@@ -258,15 +258,35 @@
 
 /* ここから受診歴編集画面------------------------ */
 .jushinreki-edit-container{
-    width: 100%;
-}
-
-.jushinreki-edit-container h2{
-    padding-left: 20px;
+    max-width: 600px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .jushinreki-edit-form-group{
-    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.jushinreki-edit-form-group label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.jushinreki-edit-form-group input[type="text"],
+.jushinreki-edit-form-group input[type="date"],
+.jushinreki-edit-form-group input[type="number"],
+.jushinreki-edit-form-group textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccd6dd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 

@@ -95,12 +95,13 @@ def UketsukeKanryou(request):
 
         return JsonResponse({"status": "受付が完了しました"})
 
+
 # 患者データ編集画面
 @login_required
 def KanzyaDataEdit(request, pk):
 
     obj = T_KANZYA.objects.get(pk=pk)
-    JushinData = T_JUSHINREKI.objects.filter(KANZYA_ID=pk)
+    JushinData = T_JUSHINREKI.objects.order_by('-JUSHINBI').filter(KANZYA_ID=pk)
 
     if request.method == "POST":
         form = KanzyaDataForm(request.POST, instance=obj)
